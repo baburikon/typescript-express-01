@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  db:
+    container_name: postgresql
+    image: postgres:12
+    restart: always
+    environment:
+      - POSTGRES_USER=$PGUSER
+      - POSTGRES_PASSWORD=$PGPASSWORD
+      - POSTGRES_DB=$PGDATABASE
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - $PGPORT:$PGPORT
+
+  server:
+    container_name: server
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    external_links:
+      - db:db
+    environment:
+      - NODE_ENV=docker
+    volumes:
+      - ./:/home/typescript-express-01/
+    ports:
+      - 8080:8080

@@ -1,0 +1,54 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  tasks: TasksQueries
+  hello: String
+}
+
+type Mutation {
+  tasks: TasksMutations
+}
+
+type TasksQueries {
+  get(id: ID!): Task
+  getAll: [Task!]!
+  search(sorting: [Sorting], offset: Int = 0, limit: Int): [Task]!
+}
+
+type TasksMutations {
+  create(params: TaskNewInput): Task!
+  patch(params: TaskPatchInput): Task!
+  delete(id: ID!): Boolean
+}
+
+type Task {
+  id: ID!
+  title: String!
+  priority: Int!
+}
+input TaskNewInput {
+  id: ID
+  title: String!
+  priority: Int = 0
+}
+input TaskPatchInput {
+  id: ID!
+  title: String
+  priority: Int
+}
+
+input Sorting {
+  field: SortingField!
+  order: SortingOrder!
+}
+enum SortingOrder {
+  asc
+  desc
+}
+enum SortingField {
+  title
+  priority
+}

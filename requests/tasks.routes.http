@@ -1,0 +1,27 @@
+### search
+
+# @no-cookie-jar
+POST http://localhost:8080/api/1.0/tasks/search
+Content-Type: application/json;charset=UTF-8
+
+{
+  "sorting": [
+    {
+      "field": "priority",
+      "order": "desc"
+    }
+  ]
+}
+
+### create
+
+# @no-cookie-jar
+POST http://localhost:8080/api/1.0/tasks
+Content-Type: application/json;charset=UTF-8
+
+{
+  "title": "Задача 547457",
+  "priority":  13
+}
+
+###

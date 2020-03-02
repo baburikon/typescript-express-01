@@ -1,0 +1,21 @@
+### search
+
+# @no-cookie-jar
+POST http://localhost:8080/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "{ tasks { search( sorting: [ { field: priority, order: desc, }, ], offset: 0, limit: 1, ) { id title priority } } }"
+}
+
+###
+
+# @no-cookie-jar
+POST http://localhost:8080/graphql
+Content-Type: application/json;charset=UTF-8
+
+{
+  "query": "mutation { tasks { create(params: {title: \"Задача 78\", priority: 43}) { id title priority } } }"
+}
+
+###
